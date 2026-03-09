@@ -1,4 +1,4 @@
-# DevOps Kubernetes Deploy
+# Deploy de Aplicação Containerizada com Kubernetes
 
 Projeto de deploy de aplicação containerizada utilizando Kubernetes.
 
