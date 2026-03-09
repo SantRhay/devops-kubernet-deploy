@@ -37,6 +37,8 @@ kubectl get services
 
 ## Resultado
 
-Aplicação nginx rodando no Kubernetes e acessível via NodePort.
+A aplicação nginx foi implantada com sucesso em um cluster Kubernetes.
 
-Projeto desenvolvido para estudo de DevOps e Cloud Computing.
+O serviço foi exposto utilizando NodePort, permitindo acesso externo à aplicação.
+
+Projeto desenvolvido para prática de conceitos DevOps e orquestração de containers
