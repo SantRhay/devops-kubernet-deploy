@@ -12,7 +12,15 @@ Projeto de deploy de aplicação containerizada utilizando Kubernetes.
 
 ## Arquitetura
 
-Application Container → Deployment → Pods → Service NodePort
+Usuário
+ ↓
+Service (NodePort)
+ ↓
+Deployment
+ ↓
+Pods
+ ↓
+Container (Nginx)
 
 ## Arquivos do projeto
 
