@@ -1,4 +1,4 @@
-# Deploy de Aplicação Containerizada com Kubernetes
+kubectl# Deploy de Aplicação Containerizada com Kubernetes
 
 Projeto de deploy de aplicação containerizada utilizando Kubernetes.
 
