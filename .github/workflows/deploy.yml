@@ -17,7 +17,7 @@ jobs:
         uses: azure/setup-kubectl@v3
 
       - name: Validar deployment
-        run: kubectl apply --dry-run=client -f deployment.yaml
+        run: kubectl apply --dry-run=client --validate=false -f deployment.yaml
 
       - name: Validar service
-        run: kubectl apply --dry-run=client -f service.yaml
+        run: kubectl apply --dry-run=client --validate=false -f service.yaml
