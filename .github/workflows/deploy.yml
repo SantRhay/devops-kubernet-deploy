@@ -20,4 +20,4 @@ jobs:
         run: kubectl apply --dry-run=client --validate=false -f deployment.yaml
 
       - name: Validar service
-        run: kubectl apply --dry-run=client --validate=false -f service.yaml
+        run: kubectl apply --dry-run=client --vallsidate=false -f service.yaml
