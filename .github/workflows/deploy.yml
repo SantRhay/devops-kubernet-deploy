@@ -1,4 +1,4 @@
-name: Kubernetes Deploy
+name: Kubernetes Validate
 
 on:
   push:
@@ -6,13 +6,18 @@ on:
       - main
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout código
         uses: actions/checkout@v3
 
-      - name: Deploy Kubernetes
-        run: |
-          kubectl apply -f service.yaml
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Validar deployment
+        run: kubectl apply --dry-run=client -f deployment.yaml
+
+      - name: Validar service
+        run: kubectl apply --dry-run=client -f service.yaml
