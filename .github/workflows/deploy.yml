@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t santrhay/devops-nginx-app:${{ github.sha }} .
+        run: docker build -t santrhay/devops-nginx-app:${{ github.sha }} -f docker/Dockerfile .
 
       - name: Push Docker image
         run: |
