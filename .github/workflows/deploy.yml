@@ -27,3 +27,9 @@ jobs:
           docker push santrhay/devops-nginx-app:${{ github.sha }}
           docker tag santrhay/devops-nginx-app:${{ github.sha }} santrhay/devops-nginx-app:latest
           docker push santrhay/devops-nginx-app:latest
+    
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+        
