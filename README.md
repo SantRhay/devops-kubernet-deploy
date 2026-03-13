@@ -1,235 +1,182 @@
-# 🚀 DevOps Kubernetes Deploy
+# 🚀 DevOps CI/CD Pipeline com Docker, Kubernetes, GitHub Actions e AWS
 
-Projeto prático de deploy de aplicação containerizada utilizando Kubernetes.
+![Docker](https://img.shields.io/badge/docker-container-blue)
+![Kubernetes](https://img.shields.io/badge/kubernetes-orchestration-blue)
+![GitHub Actions](https://img.shields.io/badge/github--actions-ci%2Fcd-orange)
+![AWS](https://img.shields.io/badge/aws-ec2-yellow)
 
-Este projeto demonstra como realizar o deploy de um container *Nginx* em um cluster Kubernetes utilizando *Deployment, **Service* e *Horizontal Pod Autoscaler (HPA)*.
-
-O objetivo é demonstrar conceitos fundamentais de *DevOps, **orquestração de containers* e *infraestrutura como código*.
-
----
-
-# 📦 Tecnologias utilizadas
-
-- Kubernetes
-- Docker
-- Nginx
-- kubectl
-- GitHub
-- GitHub Actions
-- GitHub Codespaces
+Este projeto demonstra a construção de um *pipeline DevOps completo* automatizando o deploy de uma aplicação containerizada utilizando Docker, Kubernetes, GitHub Actions e AWS.
 
 ---
 
-# 🏗 Arquitetura do Projeto
+# 📌 Arquitetura do Projeto
 
-Usuário  
+Fluxo do pipeline:
+
+Developer push code  
 ↓  
-Service (NodePort)  
+GitHub Repository  
 ↓  
-Pods Kubernetes  
+GitHub Actions CI/CD  
 ↓  
-Container Nginx  
-
-O Kubernetes gerencia automaticamente:
-
-- criação dos containers
-- balanceamento de carga
-- escalabilidade
-- auto recuperação
-
----
-
-# 📁 Estrutura do projeto
-
-
-devops-kubernet-deploy
-│
-├── deployment.yaml
-├── service.yaml
-├── README.md
-└── .github
-    └── workflows
-        └── deploy.yml
-
+Build Docker Image  
+↓  
+Push DockerHub  
+↓  
+SSH AWS EC2  
+↓  
+Deploy Kubernetes  
+↓  
+Application Running
 
 ---
 
-# ⚙️ Como executar o projeto
+# 🧰 Tecnologias Utilizadas
 
-## 1️⃣ Criar cluster Kubernetes
-
-
-kind create cluster
-
-
----
-
-## 2️⃣ Aplicar Deployment
-
-
-kubectl apply -f deployment.yaml
-
+Docker  
+Kubernetes  
+GitHub Actions  
+AWS EC2  
+Nginx  
 
 ---
 
-## 3️⃣ Criar Service
+# 📂 Estrutura do Projeto
 
+devops-kubernetes-deploy
 
-kubectl apply -f service.yaml
+app/  
+&nbsp;&nbsp;&nbsp;&nbsp;index.html  
 
+docker/  
+&nbsp;&nbsp;&nbsp;&nbsp;Dockerfile  
+
+k8s/  
+&nbsp;&nbsp;&nbsp;&nbsp;deployment.yaml  
+&nbsp;&nbsp;&nbsp;&nbsp;service.yaml  
+
+.github/workflows/  
+&nbsp;&nbsp;&nbsp;&nbsp;deploy.yml  
+
+README.md
 
 ---
 
-## 4️⃣ Verificar pods
+# ⚙️ Pipeline CI/CD
 
+O pipeline executa automaticamente sempre que um commit é enviado ao repositório.
+
+Etapas do pipeline:
+
+1. Checkout do código
+2. Build da imagem Docker
+3. Push da imagem para DockerHub
+4. Conexão SSH na EC2
+5. Deploy no Kubernetes
+
+---
+
+# 🐳 Docker
+
+Build da imagem
+
+docker build -t usuario/devops-web .
+
+Rodar container local
+
+docker run -p 8080:80 usuario/devops-web
+
+---
+
+# ☸️ Kubernetes
+
+Aplicar deployment
+
+kubectl apply -f k8s/deployment.yaml
+
+Aplicar service
+
+kubectl apply -f k8s/service.yaml
+
+Verificar pods
 
 kubectl get pods
 
+Verificar services
 
-Resultado esperado:
-
-
-devops-web-xxxxx   Running
-
+kubectl get svc
 
 ---
 
-## 5️⃣ Verificar serviços
+# 🌐 Acesso à Aplicação
 
+Após o deploy a aplicação pode ser acessada em:
 
-kubectl get services
-
-
----
-
-## 6️⃣ Acessar aplicação
-
-
-kubectl port-forward service/devops-service 8080:80
-
-
-Abrir no navegador:
-
-
-http://localhost:8080
-
+http://IP_DA_EC2:30007
 
 ---
 
-# 📈 Escalabilidade
+# 📊 Comandos úteis Kubernetes
 
-Escalar manualmente a aplicação:
-
-
-kubectl scale deployment devops-web --replicas=4
-
-
-Verificar pods:
-
-
-kubectl get pods
-
+kubectl get pods  
+kubectl get svc  
+kubectl get deployments  
+kubectl describe pod NOME  
+kubectl logs NOME  
 
 ---
 
-# ⚡ Autoscaling (HPA)
+# ⚠️ Problemas comuns
 
-Criar autoscaling baseado em CPU:
+NodePort já utilizado
 
+Erro:
 
-kubectl autoscale deployment devops-web --cpu-percent=50 --min=2 --max=10
+provided port is already allocated
 
+Solução:
 
-Verificar autoscaler:
-
-
-kubectl get hpa
-
+kubectl delete service devops-web-service
 
 ---
 
-# 🔁 Self-Healing
+kubectl command not found
 
-O Kubernetes recria automaticamente pods que falham.
-
-Exemplo:
-
-
-kubectl delete pod NOME_DO_POD
-
-
-O Kubernetes cria um novo pod automaticamente.
+Executar dentro da EC2 ou instalar kubectl.
 
 ---
 
-# ⚙️ CI/CD com GitHub Actions
+# 📈 Fluxo CI/CD
 
-O projeto utiliza *GitHub Actions* para validar os arquivos Kubernetes automaticamente sempre que houver push no repositório.
-
-Pipeline:
-
-
-GitHub
-   ↓
-GitHub Actions
-   ↓
-Validação dos arquivos Kubernetes
-
-
----
-
-# 🎯 Conceitos DevOps aplicados
-
-Este projeto demonstra:
-
-- Containerização
-- Orquestração de containers
-- Deploy automatizado
-- Escalabilidade horizontal
-- Alta disponibilidade
-- Infraestrutura como código
+Commit no GitHub  
+↓  
+GitHub Actions executa pipeline  
+↓  
+Build Docker Image  
+↓  
+Push DockerHub  
+↓  
+SSH EC2  
+↓  
+kubectl apply  
+↓  
+Deploy Kubernetes  
 
 ---
 
-# 📊 Comandos úteis
+# 🎯 Objetivo do Projeto
 
-Ver pods
+Demonstrar habilidades práticas em:
 
-
-kubectl get pods
-
-
-Ver deployments
-
-
-kubectl get deployments
-
-
-Ver serviços
-
-
-kubectl get services
-
-
-Ver autoscaling
-
-
-kubectl get hpa
-
-
----
-
-# 🚀 Melhorias futuras
-
-- Deploy automatizado com DockerHub
-- Monitoramento com Prometheus
-- Dashboard Kubernetes
-- Ingress Controller
-- Observabilidade com Grafana
+DevOps  
+CI/CD  
+Docker  
+Kubernetes  
+Cloud Computing  
 
 ---
 
 # 👨‍💻 Autor
 Rayane Santana
 
-Projeto desenvolvido como parte de estudos em *DevOps e Kubernetes*
+Projeto desenvolvido para estudo e prática de DevOps e automação de deploy.
