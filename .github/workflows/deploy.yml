@@ -45,6 +45,12 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
 
       - name: Deploy Kubernetes
-        run: |
-          kubectl apply --validate=false -f k8s/deployment.yaml
-          kubectl apply --validate=false -f k8s/service.yaml
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd devops-kubernetes-deploy
+            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f k8s/service.yaml
