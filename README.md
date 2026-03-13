@@ -185,13 +185,13 @@ Projeto desenvolvido para estudo e prática de DevOps e automação de deploy.
 
 ### Kubernetes Pods
 
-![Kubernetes Pods](docs/kubernetes.png)
+![Kubernetes Pods](docs/pods1.png)
 
 ---
 
 ### Kubernetes Service
 
-![Service](docs/service.png)
+![Service](docs/svc.png)
 
 ---
 
@@ -203,4 +203,4 @@ Projeto desenvolvido para estudo e prática de DevOps e automação de deploy.
 
 ### Aplicação Rodando
 
-![Aplicação](docs/app.png)
+![Aplicação](docs/aplicação.png)
