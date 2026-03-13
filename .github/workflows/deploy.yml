@@ -1,26 +1,42 @@
-deploy-kubernetes:
-  needs: build-and-push
-  runs-on: ubuntu-latest
+name: DevOps Kubernetes Deploy
 
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+on:
+  push:
+    branches:
+      - main
 
-    - name: Configure kubeconfig
-      run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+jobs:
 
-    - name: Deploy Kubernetes
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ubuntu
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          rm -rf devops-kubernet-deploy
-          git clone https://github.com/SantRhay/devops-kubernet-deploy.git
-          cd devops-kubernet-deploy
+  build-and-push:
+    runs-on: ubuntu-latest
 
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+  deploy-kubernetes:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+
+      - name: Deploy Kubernetes
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            rm -rf devops-kubernet-deploy
+            git clone https://github.com/SantRhay/devops-kubernet-deploy.git
+            cd devops-kubernet-deploy
+
+            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f k8s/service.yaml
