@@ -1,10 +1,9 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devops-web
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: devops-web
@@ -15,6 +14,6 @@ spec:
     spec:
       containers:
       - name: devops-web
-        image: nginx
+        image: DOCKER_USER/devops-web:latest
         ports:
         - containerPort: 80
