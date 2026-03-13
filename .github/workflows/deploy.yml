@@ -51,6 +51,15 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd devops-kubernetes-deploy
-            kubectl apply -f k8s/deployment.yaml
-            kubectl apply -f k8s/service.yaml
+            if [ ! -d "devops-kubernetes-deploy" ]; then
+              git clone https://github.com/SantRhay/devops-kubernetes-deploy.git
+            else
+              cd devops-kubernetes-deploy
+              git pull
+              cd ..
+             fi
+
+             cd devops-kubernetes-deploy
+
+             kubectl apply -f k8s/deployment.yaml
+             kubectl apply -f k8s/service.yaml
