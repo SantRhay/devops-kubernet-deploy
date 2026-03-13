@@ -1,5 +1,6 @@
 # 🚀 DevOps CI/CD Pipeline com Docker, Kubernetes, GitHub Actions e AWS
 
+![CI](https://github.com/SantRhay/devops-kubernet-deploy/actions/workflows/deploy.yml/badge.svg)
 ![Docker](https://img.shields.io/badge/docker-container-blue)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-orchestration-blue)
 ![GitHub Actions](https://img.shields.io/badge/github--actions-ci%2Fcd-orange)
