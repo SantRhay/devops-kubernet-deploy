@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             if [ ! -d "devops-kubernetes-deploy" ]; then
-              git clone https://github.com/SantRhay/devops-kubernetes-deploy.git
+              git clone https://github.com/SantRhay/devops-kubernet-deploy.git
             else
               cd devops-kubernetes-deploy
               git pull
