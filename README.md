@@ -180,3 +180,27 @@ Cloud Computing
 Rayane Santana
 
 Projeto desenvolvido para estudo e prática de DevOps e automação de deploy.
+
+## 📸 Screenshots do Projeto
+
+### Kubernetes Pods
+
+![Kubernetes Pods](docs/kubernetes.png)
+
+---
+
+### Kubernetes Service
+
+![Service](docs/service.png)
+
+---
+
+### Pipeline CI/CD
+
+![Pipeline](docs/pipeline.png)
+
+---
+
+### Aplicação Rodando
+
+![Aplicação](docs/app.png)
