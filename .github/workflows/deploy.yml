@@ -50,16 +50,10 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            if [ ! -d "devops-kubernetes-deploy" ]; then
-              git clone https://github.com/SantRhay/devops-kubernet-deploy.git
-            else
-              cd devops-kubernetes-deploy
-              git pull
-              cd ..
-             fi
+         script: |
+           rm -rf devops-kubernet-deploy
+           git clone https://github.com/SantRhay/devops-kubernet-deploy.git
+           cd devops-kubernet-deploy
 
-             cd devops-kubernetes-deploy
-
-             kubectl apply -f k8s/deployment.yaml
-             kubectl apply -f k8s/service.yaml
+           kubectl apply -f k8s/deployment.yaml
+           kubectl apply -f k8s/service.yaml
